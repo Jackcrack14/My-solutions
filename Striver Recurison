@@ -1,0 +1,50 @@
+# Palindrome Partitioning
+def subset(s):
+    res = []
+    def pali(a,subarr):
+        if a ==len(s) :
+            res.append(subarr)
+            return
+        for i in range(a,len(s)) :
+            if s[a:i+1] == s[a:i+1][::-1] :
+                pali(i+1,subarr+[s[a:i+1]])
+    pali(0,[])
+    return res
+s = 'aab'
+print(subset(s))
+
+
+# Combination Sum II
+
+def sub_seq(arr,k) :
+    arr.sort()
+    res = [[]]
+    for i in range(len(arr)) :
+        if i == 0 or arr[i] != arr[ i - 1] :
+            l = len(res)
+        for j in range(len(res) - l , len(res)) :
+            res.append(res[j] + [arr[i]])
+    for i in range(len(res)):
+        if sum(res[i])== k :
+             print(res[i])
+
+    return
+
+print(sub_seq([1,2,3,2],4)) 
+
+
+# Combination Sum I
+
+def sub_seq(arr,k) :
+    arr.sort()
+    res = [[]]
+    for i in range(len(arr)) :
+        for j in range( len(res)) :
+            res.append(res[j] + [arr[i]])
+    for i in range(len(res)):
+        if sum(res[i])== k :
+             print(res[i])
+
+    return
+
+print(sub_seq([1,2,3,2],4)) 
