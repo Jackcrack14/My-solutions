@@ -85,3 +85,88 @@ def find_parent(self, parent,i):
                     return True
                 self.union(parent,x,y)
  
+# Cycle Detection using DFS 
+from collections import defaultdict
+class Graph():
+    def __init__(self,ver) :
+        self.v = ver
+    
+        self.graph = defaultdict(list)
+    
+    def addEdge(self,x,y) :
+        self.graph[x].append(y)
+        
+        self.graph[y].append(y)
+        
+    def dfs(self,a,visited,parent) :
+        
+        visited[a] = True
+        
+        for x in self.graph[a] :
+            if visited[x] == False :
+                if self.dfs(x,visited,a) :
+                    return True
+            elif parent != x :
+                    return True
+        return False
+        
+    def cyclic_dfs(self) :
+        
+        visited = [False] *(self.v)
+        
+        for a in range(self.v) :
+            if visited[a] == False :
+                if (self.dfs(a,visited,-1)) :
+                    return True
+                    
+                    
+        return False
+        
+g = Graph(5)
+g.addEdge(1, 0)
+g.addEdge(1, 2)
+g.addEdge(2,0)
+g.addEdge(0, 3)
+g.addEdge(3, 4)
+ 
+if g.cyclic_dfs():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle ")
+g1 = Graph(3)
+g1.addEdge(0, 1)
+g1.addEdge(1, 2)
+ 
+ 
+if g1.cyclic_dfs():
+    print("Graph contains cycle")
+else:
+    print("Graph does not contain cycle ")
+    
+# Cycle Detection using BFS
+
+def bfs(self,a,visited,parent) :
+        q = Queue()
+        parent = [-1]*(self.v)
+        visited[a] = True
+        q.put(a)
+        while not q.empty() :
+            x = q.get()
+            for i in self.graph[x] :
+                if visited[i] == False :
+                    visited[i] = True
+                    q.put(i)
+                    parent[i]=x
+                elif parent[x] != i :
+                    return True
+            return False
+
+    def cyclic_bfs(self,x) :
+         visited = [False] * (self.v)
+
+         for i in range(self.v) :
+             if visited[i] == False :
+                 if self.bfs(i,visited,x) :
+                     return True
+         return False
+            
