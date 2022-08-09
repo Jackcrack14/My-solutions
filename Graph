@@ -22,4 +22,31 @@
                         return res
 
 
+ # BFS Traversal of Graph
  
+  def bfs(self,src,tar) :
+        q = Queue()
+        visited= set()
+        q.put(src)
+        visited.add(src)
+        parent = dict()
+        parent[src] = None
+        path_found = False
+        while q is not q.empty() :
+            current = q.get()
+            if current == tar :
+                path_found = True
+                break
+            for node in self.graph[current] :
+                if node not in visited :
+                    q.put(node)
+                    parent[node] = current
+                    visited.add(node)
+
+        path = []
+        if path_found :
+            path.append(tar)
+            while parent[tar] is not None :
+                path.append(parent[tar])
+                tar = parent[tar]
+        return path
