@@ -1,0 +1,25 @@
+# DFS Traversal of Graph
+
+    from collections import defaultdict
+    class Graph() :
+        def __init__(self,vertices) :
+            self.v = vertices
+
+            self.graph = defaultdict(list)
+
+        def add_edge(self,u,v) :
+            self.graph[u].append(v)
+
+        def dfs(self,src,tar,path=[],visited=set()) :
+            path.append(src)
+            visited.add(src)
+            if src == tar :
+                return path
+            for node in self.graph[src] :
+                if node not in visited :
+                    res = self.dfs(node,tar,path,visited)
+                    if res is not None :
+                        return res
+
+
+ 
