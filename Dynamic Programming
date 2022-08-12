@@ -79,3 +79,23 @@ mat = [[1, 2, 9],
        [4, 6, 7]]
 n = 3
 print("Length of the longest path is ", Longestpath(mat))
+
+
+# Optimal strategy game 
+
+def strategy(arr,n) :
+    memo = {}
+    def choice(i,j) :
+        if i > j or j< 0 or i >= n :
+           return 0
+        k = (i,j)
+        if k in memo :
+            return memo[k]
+        option1 = arr[i] + min(choice(i+2,j),choice(i+1,j-1)) 
+
+        option2 = arr[j] + min(choice(i+1,j-1),choice(i,j-2))
+        memo[k] = max(option1,option2)
+        return memo[k]
+    return choice(0,n-1)
+
+print(strategy(arr,n))
