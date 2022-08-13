@@ -71,3 +71,28 @@ def Morris_Preorder(root) :
                 pre.right = None             
                 current = current.right
 
+# Constructing Binary Tree from Parent  Array 
+
+
+from collections import defaultdict
+parent = [-1,0,0,1,1,3,5]
+child = [idx for idx in range(7)] 
+graph = defaultdict(list)
+for i in range(7) :
+    if parent[i] == -1 :
+        continue
+    else :
+        graph[parent[i]].append(child[i])
+print(graph)
+def bfs(full_list,graph,node) :
+    path =[]
+    path.append(node)
+    while path :
+        cur = path.pop(0)
+        print(cur)
+        for neighbour in graph[cur] :
+            if neighbour not in full_list :
+                full_list.append(neighbour)
+                path.append(neighbour)
+    
+print(bfs([],graph,0))
