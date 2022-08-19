@@ -96,3 +96,39 @@ def bfs(full_list,graph,node) :
                 path.append(neighbour)
     
 print(bfs([],graph,0))
+# Diameter of a Tree
+
+class node :
+    def __init__(self,data) :
+        self.data = data
+        self.left = None
+        self.right = None
+class Height :
+    def __init__(self) :
+        self.h = 0
+def postorder(root,height) :
+    lh = Height()
+    rh = Height()
+    if root is None :
+        height.h = 0
+        return 0
+    l_diameter = postorder(root.left,lh)
+    r_diameter = postorder(root.right,rh)
+
+    height.h = max(lh.h, rh.h) + 1
+
+    return max(lh.h+rh.h+1,max(l_diameter,r_diameter))
+
+def util_postorder(self) :
+    h = Height()
+    return postorder(root,h)
+
+
+root = node(4)
+root.left = node(7)
+root.right = node(8)
+root.right.left = node(1)
+root.right.right = node(3)
+root.right.left.left = node(0)
+
+print(util_postorder(root))
