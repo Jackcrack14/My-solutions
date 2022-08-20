@@ -169,3 +169,69 @@ root.right.left = node(6)
 root.right.right = node(7)
 
 lca(root,6,7)
+
+
+# Checking if two Trees are identical 
+
+class node :
+    def __init__(self,val) :
+        self.value = val
+        self.left = None
+        self.right = None
+class node1 :
+    def __init__(self,data) :
+        self.data = data
+        self.left = None
+        self.right = None
+def identical(root,root1) :
+    q1,q2 = [],[]
+    l,r  = [],[]
+    q1.append(root)
+    q2.append(root1)
+    while len(q1) > 0 :
+        #print(q[0].value)
+        l.append(q1[0].value)
+        cur = q1.pop(0)
+        if cur.left is not None :
+            q1.append(cur.left)
+        if cur.right is not None :
+            q1.append(cur.right)
+    while len(q2) > 0 :
+        #print(q[0].value)
+        r.append(q2[0].value)
+        cur = q2.pop(0)
+        if cur.left is not None :
+            q2.append(cur.left)
+        if cur.right is not None :
+            q2.append(cur.right)
+    print(l)
+    print(r)
+    for i in range(len(l)) :
+        if l[i] == r[i] :
+            continue
+        else :
+            return False
+            break
+    return True
+
+
+root = node(1)
+root.left = node(2)
+root.right = node(3)
+root.left.left = node(4)
+root.left.right = node(5)
+root.right.left = node(6)
+root.right.right = node(7)
+
+root1 = node(1)
+root1.left = node(2)
+root1.right = node(3)
+root1.left.left = node(4)
+root1.left.right = node(5)
+root1.right.left = node(6)
+root1.right.right = node(7)
+
+if identical(root,root1) :
+    print("identical")
+else :
+    print("not identical")
