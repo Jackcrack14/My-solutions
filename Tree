@@ -132,3 +132,40 @@ root.right.right = node(3)
 root.right.left.left = node(0)
 
 print(util_postorder(root))
+
+
+# Lowest Common Ancestor of Tree
+
+class node :
+    def __init__(self,val) :
+        self.value = val
+        self.left = None
+        self.right = None
+
+def lca(root,x,y) :
+    q = []
+    v  = [-1  for _ in range(100)]
+    q.append(root)
+    v.append(root)
+    while len(q) > 0 :
+        #print(q[0].value)
+        cur = q.pop(0)
+        if cur.left is not None :
+            q.append(cur.left)
+            v[cur.left.value] = cur.value
+        if cur.right is not None :
+            q.append(cur.right)
+            v[cur.right.value] = cur.value
+    if v[x] == v[y] :
+        print(v[y])
+
+
+root = node(1)
+root.left = node(2)
+root.right = node(3)
+root.left.left = node(4)
+root.left.right = node(5)
+root.right.left = node(6)
+root.right.right = node(7)
+
+lca(root,6,7)
