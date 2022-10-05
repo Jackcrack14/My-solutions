@@ -86,3 +86,34 @@ def seq(n,k) :
     return s
 
 print(seq(n,k))
+
+# Sudoku Solver
+
+def solve(board) :
+            for i in range(len(board)) :
+                for j in range(len(board)) :
+                    if board[i][j] == "." :
+                        for x in range(len(board)) :
+                            if (isvalid(board,i,j,x)) :
+                                board[i][j] = str(x)
+                                if solve(board) :
+                                    return True
+                                else :
+                                    board[i][j] = "."
+                        return False
+            return True
+def isvalid(board,row,col,x) :
+            for i in range(len(board)) :
+                if board[i][col] == str(x) :
+                    return False
+            for i in range(len(board)) :
+                if board[row][i] == str(x) :
+                    return False
+            for i in range(len(board)) :
+                if board[3*(row//3) + i//3][3*(col//3) + i//3] == str(x) :
+                    return False
+            return True
+
+
+
+solve(board)
